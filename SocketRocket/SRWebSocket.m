@@ -51,7 +51,6 @@
 #error SocketRocket muust be compiled with ARC enabled
 #endif
 
-
 typedef enum  {
     SROpCodeTextFrame = 0x1,
     SROpCodeBinaryFrame = 0x2,
@@ -657,6 +656,7 @@ static __strong NSData *CRLFCRLF;
             NSUInteger usedLength = 0;
             
             BOOL success = [reason getBytes:(char *)mutablePayload.mutableBytes + sizeof(uint16_t) maxLength:payload.length - sizeof(uint16_t) usedLength:&usedLength encoding:NSUTF8StringEncoding options:NSStringEncodingConversionExternalRepresentation range:NSMakeRange(0, reason.length) remainingRange:&remainingRange];
+#pragma unused(success)
             
             assert(success);
             assert(remainingRange.length == 0);
@@ -1021,6 +1021,7 @@ static const uint8_t SRPayloadLenMask   = 0x7F;
         } else {
             [self _addConsumerWithDataLength:extra_bytes_needed callback:^(SRWebSocket *self, NSData *data) {
                 size_t mapped_size = data.length;
+#pragma unused(mapped_size)
                 const void *mapped_buffer = data.bytes;
                 size_t offset = 0;
                 
@@ -1603,6 +1604,8 @@ static const size_t SRFrameHeaderOverhead = 32;
 
 @end
 
+#pragma GCC diagnostic ignored "-Wunused-function"
+
 static inline dispatch_queue_t log_queue() {
     static dispatch_queue_t queue = 0;
     static dispatch_once_t onceToken;
@@ -1612,6 +1615,8 @@ static inline dispatch_queue_t log_queue() {
     
     return queue;
 }
+
+#pragma GCC diagnostic warning "-Wunused-function"
 
 //#define SR_ENABLE_LOG
 
