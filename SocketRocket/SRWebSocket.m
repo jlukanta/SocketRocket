@@ -1604,7 +1604,7 @@ static const size_t SRFrameHeaderOverhead = 32;
 
 @end
 
-#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma clang diagnostic ignored "-Wunused-function"
 
 static inline dispatch_queue_t log_queue() {
     static dispatch_queue_t queue = 0;
@@ -1616,7 +1616,7 @@ static inline dispatch_queue_t log_queue() {
     return queue;
 }
 
-#pragma GCC diagnostic warning "-Wunused-function"
+#pragma clang diagnostic warning "-Wunused-function"
 
 //#define SR_ENABLE_LOG
 
